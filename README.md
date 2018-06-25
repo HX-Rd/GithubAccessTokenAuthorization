@@ -2,13 +2,13 @@
 Github Access Token Authentication for .netcore 2.1
 
 ## What does this extension do?
-This extension adds Google authorization to Web Api's in dot net 2.1. It does not do a OIDC authentication, it only verifies the github
+This extension adds Github authorization to Web Api's in dot net 2.1. It does not do a OIDC authentication, it only verifies the github
 tokens, and adds claims to the principal from github token endpoint. There are some options you can set to affect 
 the behavior of the plugin and these are covered here below. There is also some caching support and will also be documented here below.
 
 ## Who is the extension for
 This is by no means a best practise for providing authorization to you apis. The best way would to protect it with jwt tokens and setup
-a identity server and use jwt tokens from it to authorize. You could then also sign in with google and get the github access token
+a identity server and use jwt tokens from it to authorize. You could then also sign in with github and get the github access token
 and send it down to the api's if you need to access the github apis. This does introduce some overhead and some times you just
 want to throw togeater an api fast and stil want some authorization. This might be a case where this extension would be helpful.
 If you have anything that is not going to be just a hobby implementation of an api, go with the [Identity Server](https://github.com/IdentityServer/IdentityServer4) route.
@@ -23,11 +23,11 @@ public void ConfigureServices(IServiceCollection services)
     services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
     services.AddAuthentication(o =>
     {
-        o.DefaultAuthenticateScheme = GoogleAccessTokenDefaults.GOOGLE_TOKEN_SCHEME;
+        o.DefaultAuthenticateScheme = GithubAccessTokenDefaults.GITHUB_TOKEN_SCHEME;
     })
-    .AddGoogleTokenAuthorization(
-        GoogleAccessTokenDefaults.GOOGLE_TOKEN_SCHEME,
-        GoogleAccessTokenDefaults.GOOGLE_TOKEN_SCHEME,
+    .AddGithubTokenAuthorization(
+        GoogleAccessTokenDefaults.GITHUB_TOKEN_SCHEME,
+        GoogleAccessTokenDefaults.GITHUB_TOKEN_SCHEME,
         o => 
         {
             o.UseMemoryCache = true;
@@ -63,6 +63,12 @@ The client seceret of the client that provided the token. This is required becau
 *Default is null*
 The name of the app that provided the access token. This is required because the `User-Agent` has to be set to the App name. See
 here [Github documentation](https://developer.github.com/v3/?#user-agent-required)
+### CacheMinutes
+*Optional*
+*Default is 20*
+Minutes to cache the token. When the token is cached there will be no callout to the token endpoint. The user might revoke the token
+while the token is cached so keep that in mind when the setting this value. Github access token do not expire but checking in with the
+token endpoint periodically seems like a good idea. There is a tradeof though since the call to the token endpoint takes some time.
 ### RequiredScopes
 *Optional*   
 *Default is null*   
