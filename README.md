@@ -26,8 +26,8 @@ public void ConfigureServices(IServiceCollection services)
         o.DefaultAuthenticateScheme = GithubAccessTokenDefaults.GITHUB_TOKEN_SCHEME;
     })
     .AddGithubTokenAuthorization(
-        GoogleAccessTokenDefaults.GITHUB_TOKEN_SCHEME,
-        GoogleAccessTokenDefaults.GITHUB_TOKEN_SCHEME,
+        GithubAccessTokenDefaults.GITHUB_TOKEN_SCHEME,
+        GithubAccessTokenDefaults.GITHUB_TOKEN_SCHEME,
         o => 
         {
             o.UseMemoryCache = true;
