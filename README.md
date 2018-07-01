@@ -32,7 +32,7 @@ public void ConfigureServices(IServiceCollection services)
         {
             o.UseMemoryCache = true;
             o.ClientId = "YOUR-CLIENT-ID";
-            o.ClientSecret "YOUR-CLIENT-SECRET";
+            o.ClientSecret = "YOUR-CLIENT-SECRET";
             o.AppName = "YOUR-APP-NAME";
             o.CacheMinutes = 20;
             o.RequiredScopes = new List<string>
