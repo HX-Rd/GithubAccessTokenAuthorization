@@ -59,8 +59,8 @@ This is the client id of the client that provided the access token. This is requ
 *Default is null*
 The client seceret of the client that provided the token. This is required because the token endpoint requires both ClientId and ClientSecret
 ### AppName
-*Required*
-*Default is null*
+*Required*   
+*Default is null*   
 The name of the app that provided the access token. This is required because the `User-Agent` has to be set to the App name. See
 here [Github documentation](https://developer.github.com/v3/?#user-agent-required)
 ### CacheMinutes
@@ -72,7 +72,7 @@ token endpoint periodically seems like a good idea. There is a tradeof though si
 ### RequiredScopes
 *Optional*   
 *Default is null*   
-If this value is null, there are no scope restrictions. If you provide scopes here, the token must provide all of these scopes to be able to access the api
+If this value is null, there are no scope restrictions. If you provide scopes here, the token must provide all of these scopes to be able to access the api. Here you can find the github oauth scope list [Github scopes](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/)
 
 ## Protecting an endpoint
 Here is an simple example on how to protect an endpoint
